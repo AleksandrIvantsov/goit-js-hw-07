@@ -38,6 +38,8 @@ function onGalleryElementClick(event) {
 	openModal(event.target.dataset.source);
 }
 
+let instanceRef;
+
 function openModal(largeImgUrl) {
 	const instance = basicLightbox.create(
 		`
@@ -49,19 +51,19 @@ function openModal(largeImgUrl) {
 		},
 	);
 	instance.show();
+	instanceRef = instance;
 }
 
-function onShowModal(instance) {
+function onShowModal() {
 	document.addEventListener("keydown", onEscButtonPress);
 }
 
-function onCloseModal(instance) {
+function onCloseModal() {
 	document.removeEventListener("keydown", onEscButtonPress);
 }
 
 function onEscButtonPress(event) {
 	if (event.key === "Escape") {
-		instance.close();
+		instanceRef.close();
 	}
-	console.log(event.key);
 }
